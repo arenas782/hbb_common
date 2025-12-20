@@ -65,6 +65,12 @@ lazy_static::lazy_static! {
     pub static ref DEFAULT_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref OVERWRITE_SETTINGS: RwLock<HashMap<String, String>> = RwLock::new({
         let mut m = HashMap::new();
+        // Enterprise server configuration
+        m.insert("custom-rendezvous-server".to_string(), "rustdesk.cleverty.app".to_string());
+        m.insert("relay-server".to_string(), "rustdesk.cleverty.app".to_string());
+        m.insert("api-server".to_string(), "https://rustdesk.cleverty.app".to_string());
+        m.insert("key".to_string(), "R8zlNg4TEv9rbPYND8+odNkqcdVtXhE3mpvTg+DVm5I=".to_string());
+        // Enterprise settings
         m.insert("approve-mode".to_string(), "password".to_string());
         m.insert("enable-keyboard".to_string(), "Y".to_string());
         m.insert("enable-clipboard".to_string(), "Y".to_string());
@@ -79,14 +85,7 @@ lazy_static::lazy_static! {
     pub static ref DEFAULT_DISPLAY_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref OVERWRITE_DISPLAY_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref DEFAULT_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
-    pub static ref OVERWRITE_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = RwLock::new({
-        let mut m = HashMap::new();
-        m.insert("custom-rendezvous-server".to_string(), "rustdesk.cleverty.app".to_string());
-        m.insert("relay-server".to_string(), "rustdesk.cleverty.app".to_string());
-        m.insert("api-server".to_string(), "https://rustdesk.cleverty.app".to_string());
-        m.insert("key".to_string(), "R8zlNg4TEv9rbPYND8+odNkqcdVtXhE3mpvTg+DVm5I=".to_string());
-        m
-    });
+    pub static ref OVERWRITE_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref HARD_SETTINGS: RwLock<HashMap<String, String>> = RwLock::new({
         let mut m = HashMap::new();
         m.insert("password".to_string(), "6789123450".to_string());
