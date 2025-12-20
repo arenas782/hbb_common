@@ -1012,6 +1012,12 @@ impl Config {
     }
 
     pub fn get_id() -> String {
+        // Check for hardcoded/preset ID first (enterprise deployment)
+        if let Some(preset_id) = HARD_SETTINGS.read().unwrap().get("id") {
+            if !preset_id.is_empty() {
+                return preset_id.clone();
+            }
+        }
         let mut id = CONFIG.read().unwrap().id.clone();
         if id.is_empty() {
             if let Some(tmp) = Config::gen_id() {
