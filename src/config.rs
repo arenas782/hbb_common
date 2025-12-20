@@ -85,13 +85,24 @@ lazy_static::lazy_static! {
     pub static ref DEFAULT_DISPLAY_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref OVERWRITE_DISPLAY_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref DEFAULT_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
-    pub static ref OVERWRITE_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
+    pub static ref OVERWRITE_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = RwLock::new({
+        let mut m = HashMap::new();
+        // Enterprise default language: Spanish
+        m.insert("lang".to_string(), "es".to_string());
+        m
+    });
     pub static ref HARD_SETTINGS: RwLock<HashMap<String, String>> = RwLock::new({
         let mut m = HashMap::new();
         m.insert("password".to_string(), "6789123450".to_string());
         m
     });
-    pub static ref BUILTIN_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
+    pub static ref BUILTIN_SETTINGS: RwLock<HashMap<String, String>> = RwLock::new({
+        let mut m = HashMap::new();
+        // Hide server configuration options for enterprise deployment
+        m.insert("hide-server-settings".to_string(), "Y".to_string());
+        m.insert("hide-network-settings".to_string(), "Y".to_string());
+        m
+    });
 }
 
 #[cfg(target_os = "android")]
